@@ -1,0 +1,20 @@
+﻿@page "/setting"
+@inject HttpClient Http
+@using BlazorDeployDemo.Shared
+
+<h3>Config</h3>
+<PageTitle>Config</PageTitle>
+
+<span>My value: @setting</span>
+
+@code {
+
+    private string setting = "Test";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await Http.GetFromJsonAsync<BlazorDeployDemo.Shared.Setting[]>("Setting");
+
+        setting = result[0].Value;
+    }
+}
